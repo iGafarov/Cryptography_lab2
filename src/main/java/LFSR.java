@@ -1,17 +1,13 @@
-package main.java;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class LFSR {
 
-    private static final int FIRST_TASK_START_POSITION = 0b1001001;
-    private static final int SECOND_TASK_START_POSITION = 0b1000111;
-    private static final int THIRD_TASK_START_POSITION = 0b1000011;
-
-    public static void firstTaskLFSR(int iterationCount) {
+    public static List<Integer> firstTaskLFSR(int iterationCount) {
+        int period = 0;
         int currentIteration = 0;
-        int startPosition = FIRST_TASK_START_POSITION;
+        boolean flag = false;
+        int startPosition = Constants.FIRST_TASK_START_POSITION;
         List<Integer> resultNumber = new ArrayList<>();
         resultNumber.add((startPosition & 1));
         while (currentIteration < iterationCount) {
@@ -19,13 +15,21 @@ public class Main {
             startPosition = ((startPosition >> 1) | (nextNumber << 5));
             resultNumber.add((startPosition & 1));
             ++currentIteration;
+            if (startPosition == Constants.FIRST_TASK_START_POSITION && flag == false) {
+                flag = true;
+                period = currentIteration;
+            }
         }
+        System.out.println("First task LFSR (x^6 + x^3 + 1): ");
         resultNumber.forEach(System.out::print);
+        return resultNumber;
     }
 
-    public static void secondTaskLFSR(int iterationCount) {
+    public static List<Integer> secondTaskLFSR(int iterationCount) {
+        int period = 0;
         int currentIteration = 0;
-        int startPosition = SECOND_TASK_START_POSITION;
+        boolean flag = false;
+        int startPosition = Constants.SECOND_TASK_START_POSITION;
         List<Integer> resultNumber = new ArrayList<>();
         resultNumber.add((startPosition & 1));
         while (currentIteration < iterationCount) {
@@ -33,13 +37,21 @@ public class Main {
             startPosition = ((startPosition >> 1) | (nextNumber << 5));
             resultNumber.add((startPosition & 1));
             ++currentIteration;
+            if (startPosition == Constants.SECOND_TASK_START_POSITION && flag == false) {
+                flag = true;
+                period = currentIteration;
+            }
         }
+        System.out.println("Second task LFSR (x^6 + x^2 + x + 1): ");
         resultNumber.forEach(System.out::print);
+        return resultNumber;
     }
 
-    public static void thirdTaskLFSR(int iterationCount) {
+    public static List<Integer> thirdTaskLFSR(int iterationCount) {
+        int period = 0;
         int currentIteration = 0;
-        int startPosition = THIRD_TASK_START_POSITION;
+        boolean flag = false;
+        int startPosition = Constants.THIRD_TASK_START_POSITION;
         List<Integer> resultNumber = new ArrayList<>();
         resultNumber.add((startPosition & 1));
         while (currentIteration < iterationCount) {
@@ -47,8 +59,14 @@ public class Main {
             startPosition = ((startPosition >> 1) | (nextNumber << 5));
             resultNumber.add((startPosition & 1));
             ++currentIteration;
+            if (startPosition == Constants.THIRD_TASK_START_POSITION && flag == false) {
+                flag = true;
+                period = currentIteration;
+            }
         }
+        System.out.println("Third task LFSR (x^6 + x + 1): ");
         resultNumber.forEach(System.out::print);
+        return resultNumber;
     }
 
     public static void main(String[] args) {
