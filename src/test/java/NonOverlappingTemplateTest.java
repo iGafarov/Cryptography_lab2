@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LFSRTest {
+public class NonOverlappingTemplateTest {
 
     private static final String PATH_TO_FILE = "src/test/resources/templates_3_bits.txt";
     private static final int m = 3;
@@ -18,7 +18,7 @@ public class LFSRTest {
 
     @Test
     public void testNonOverlappingTemplateMatching() {
-        List<String> lfsr = getLfsrNumbers();
+        List<String> lfsr = TestUtils.getLfsrNumbers();
         List<String> templates = getNumbersFromFile();
         for (String lfsrValue : lfsr) {
             System.out.println("\t\t============== Result ================");
@@ -45,25 +45,6 @@ public class LFSRTest {
             e.printStackTrace();
         }
         return resultList;
-    }
-
-    private List<String> getLfsrNumbers() {
-        List<String> lfsrValues = new ArrayList<>();
-        List<Integer> first = LFSR.firstTaskLFSR(100000);
-        List<Integer> second = LFSR.secondTaskLFSR(100000);
-        List<Integer> third = LFSR.thirdTaskLFSR(100000);
-        lfsrValues.add(getStringFromIntegerList(first));
-        lfsrValues.add(getStringFromIntegerList(second));
-        lfsrValues.add(getStringFromIntegerList(third));
-        return lfsrValues;
-    }
-
-    private String getStringFromIntegerList(List<Integer> integerList) {
-        String string = "";
-        for(Integer integer : integerList) {
-            string = string.concat(String.valueOf(integer));
-        }
-        return string;
     }
 
     private void nonOverlappingTemplateMatchingAlgorithm(String lfsrValue, List<String> templates) {
