@@ -25,7 +25,6 @@ public class LongestRunOfOnesInBlockTest {
         for (String lfsr : lfsrList) {
             List<String> blocks = getBlocks(lfsr);
             int N = lfsr.length() / M;
-            int nDisc = lfsr.length() % M;
             List<Integer> onesBlocksCounts = getBlocksOnesCount(blocks);
 
             double[] vValues = new double[K + 1];
@@ -54,9 +53,6 @@ public class LongestRunOfOnesInBlockTest {
     private void getVvalues(List<Integer> onesBlocksCount, double[] vValues) {
         double firstVvalue = 0.0;
         double lastVvalue = 0.0;
-        int indexV = 0;
-        int indexEtalonV = 0;
-        int value = 0;
         int max = Collections.max(onesBlocksCount);
         int min = Collections.min(onesBlocksCount);
         for (Integer i = min; i <= max; ++i) {

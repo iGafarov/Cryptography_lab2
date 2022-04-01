@@ -1,5 +1,6 @@
 
 import org.apache.mahout.math.jet.stat.Gamma;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
