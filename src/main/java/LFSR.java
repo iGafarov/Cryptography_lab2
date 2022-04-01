@@ -20,8 +20,8 @@ public class LFSR {
                 period = currentIteration;
             }
         }
-        System.out.println("\nFirst task LFSR (x^6 + x^3 + 1): \n");
-        resultNumber.forEach(System.out::print);
+        /*System.out.println("\nFirst task LFSR (x^6 + x^3 + 1): \n");
+        resultNumber.forEach(System.out::print);*/
         return resultNumber;
     }
 
@@ -42,8 +42,8 @@ public class LFSR {
                 period = currentIteration;
             }
         }
-        System.out.println("\nSecond task LFSR (x^6 + x^2 + x + 1): \n");
-        resultNumber.forEach(System.out::print);
+       /* System.out.println("\nSecond task LFSR (x^6 + x^2 + x + 1): \n");
+        resultNumber.forEach(System.out::print);*/
         return resultNumber;
     }
 
@@ -64,8 +64,8 @@ public class LFSR {
                 period = currentIteration;
             }
         }
-        System.out.println("\nThird task LFSR (x^6 + x + 1): \n");
-        resultNumber.forEach(System.out::print);
+        /*System.out.println("\nThird task LFSR (x^6 + x + 1): \n");
+        resultNumber.forEach(System.out::print);*/
         return resultNumber;
     }
 
