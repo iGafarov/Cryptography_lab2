@@ -12,10 +12,12 @@ import java.util.List;
 
 public class NonOverlappingTemplateTest {
 
-    private static final String PATH_TO_FILE = "src/test/resources/templates_3_bits.txt";
-    private static final int m = 3;
+//    private static final String PATH_TO_FILE = "src/test/resources/templates_3_bits.txt";
+//    private static final String PATH_TO_FILE = "src/test/resources/templates20.txt";
+    private static final String PATH_TO_FILE = "src/test/resources/testtemplate.txt";
+    private static final int m = 9;
     private static final int N = 8;
-    private static final int TEMPLATE_LENGTH = 3;
+    private static final int TEMPLATE_LENGTH = 9;
 
     @Test
     public void testNonOverlappingTemplateMatching() {
@@ -77,7 +79,7 @@ public class NonOverlappingTemplateTest {
                 chiSquaredNumerator += Math.pow((wValue - mu),2);
             }
             double chiSquared = chiSquaredNumerator/sigmaSquared;
-            double pValue = Gamma.incompleteGamma((N / 2), chiSquared / 2);
+            double pValue = Gamma.incompleteGammaComplement((N / 2), chiSquared / 2);
             printResult(template, mu, sigmaSquared, chiSquared, pValue);
         }
     }

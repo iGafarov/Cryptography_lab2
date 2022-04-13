@@ -22,12 +22,13 @@ public class LinerComplexityTest {
 
             double chi = 0.0;
             double pValue;
-            int complexity;
+            double complexity;
             double T, mu;
-            mu = M / 2.0 + (9.0 + (M % 2 == 0 ? 1.0 : -1.0)) / 36.0 - (M / 3.0 + 2.0 / 9.0) / Math.pow(2.0, M);
+            mu = M / 2.0 + (9.0 + ((M % 2 == 0 ? 1.0 : -1.0)) / 36.0) - ((M / 3.0 + 2.0 / 9.0) / Math.pow(2.0, M));
             List<String> blocks = getBlocks(lfsr);
             for (String block : blocks) {
                 complexity = linearComplexity(block, M);
+                System.out.println(complexity);
                 T = (M % 2 == 0 ? 1.0 : -1.0) * (complexity - mu) + 2.0 / 9.0;
                 if (T <= -2.5) vValues[0]++;
                 else if (T <= -1.5) vValues[1]++;
@@ -41,7 +42,7 @@ public class LinerComplexityTest {
             for (int i = 0; i < 7; i++) {
                 chi += Math.pow(vValues[i] - N * PI_VALUES[i], 2.0) / (N * PI_VALUES[i]);
             }
-            pValue = Gamma.incompleteGamma(K / 2, chi / 2.0);
+            pValue = Gamma.incompleteGammaComplement(K / 2, chi / 2.0);
             print(chi, pValue, vValues);
         }
     }
@@ -63,50 +64,17 @@ public class LinerComplexityTest {
         return blocks;
     }
 
-    public static int linearComplexity(String block, int M) {
-        char[] a = block.toCharArray();
-        int N_ = 0, L = 0, m = -1, d = 0;
-        int[] B_, C, P, T;
-        B_ = new int[M];
-        C = new int[M];
-        P = new int[M];
-        T = new int[M];
-        for (int i = 0; i < M; i++) {
-            B_[i] = 0;
-            C[i] = 0;
-            T[i] = 0;
-            P[i] = 0;
+    public static double linearComplexity(String block, int M) {
+        int L = 0;
+        char[] blockElems = block.toCharArray();
+        if (blockElems[0] == '1') {
+            ++L;
         }
-        C[0] = 1;
-        B_[0] = 1;
-        while (N_ < M) {
-            d = b2i(a[N_]);
-            for (int i = 1; i <= L; i++)
-                d += C[i] * b2i(a[N_ - i]);
-            d = d % 2;
-            if (d == 1) {
-                for (int i = 0; i < M; i++) {
-                    T[i] = C[i];
-                    P[i] = 0;
-                }
-                for (int j = 0; j < M; j++)
-                    if (B_[j] == 1)
-                        P[j + N_ - m] = 1;
-                for (int i = 0; i < M; i++)
-                    C[i] = (C[i] + P[i]) % 2;
-                if (L <= N_ / 2) {
-                    L = N_ + 1 - L;
-                    m = N_;
-                    for (int i = 0; i < M; i++)
-                        B_[i] = T[i];
-                }
+        for (int i = 1; i < blockElems.length; ++i) {
+            if (blockElems[i] == '1' && blockElems[i-1] == '0') {
+                ++L;
             }
-            N_++;
         }
         return L;
-    }
-
-    private static int b2i(char b) {
-        return b == '1' ? 1 : 0;
     }
 }

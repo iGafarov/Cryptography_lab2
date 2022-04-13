@@ -14,10 +14,10 @@ public class LongestRunOfOnesInBlockTest {
     private static final int[] V_VALUES_ETALON_2 = {4, 5, 6, 7, 8, 9};
     private static final double[] PI_VALUES_2 = {0.1174, 0.2430, 0.2493, 0.1752, 0.1027, 0.1124};
 
-    private static final int K = K_2;
-    private static final int M = M_2;
-    private static final double[] PI_VALUES = PI_VALUES_2;
-    private static final int[] V_VALUES_ETALON = V_VALUES_ETALON_2;
+    private static final int K = 6;
+    private static final int M = M_3;
+    private static final double[] PI_VALUES = PI_VALUES_1;
+    private static final int[] V_VALUES_ETALON = V_VALUES_ETALON_1;
 
     @Test
     public void testLongestRunOfOnesInBlock() {
@@ -30,7 +30,7 @@ public class LongestRunOfOnesInBlockTest {
             double[] vValues = new double[K + 1];
             getVvalues(onesBlocksCounts, vValues);
             double chi = calculateChiSquared(vValues, N);
-            double pValue = Gamma.incompleteGamma(K / 2, chi / 2);
+            double pValue = Gamma.incompleteGammaComplement(K / 2, chi / 2);
             print(chi, pValue, vValues);
         }
     }
