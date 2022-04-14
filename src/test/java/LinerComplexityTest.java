@@ -27,8 +27,8 @@ public class LinerComplexityTest {
             mu = M / 2.0 + (9.0 + ((M % 2 == 0 ? 1.0 : -1.0)) / 36.0) - ((M / 3.0 + 2.0 / 9.0) / Math.pow(2.0, M));
             List<String> blocks = getBlocks(lfsr);
             for (String block : blocks) {
-                complexity = linearComplexity(block, M);
-                System.out.println(complexity);
+                complexity = linearComplexity(block);
+//                System.out.println(complexity);
                 T = (M % 2 == 0 ? 1.0 : -1.0) * (complexity - mu) + 2.0 / 9.0;
                 if (T <= -2.5) vValues[0]++;
                 else if (T <= -1.5) vValues[1]++;
@@ -36,10 +36,10 @@ public class LinerComplexityTest {
                 else if (T <= 0.5) vValues[3]++;
                 else if (T <= 1.5) vValues[4]++;
                 else if (T <= 2.5) vValues[5]++;
-                else vValues[6]++;
+                else if (T > 2.5) vValues[6]++;
             }
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 6; i++) {
                 chi += Math.pow(vValues[i] - N * PI_VALUES[i], 2.0) / (N * PI_VALUES[i]);
             }
             pValue = Gamma.incompleteGammaComplement(K / 2, chi / 2.0);
@@ -64,17 +64,33 @@ public class LinerComplexityTest {
         return blocks;
     }
 
-    public static double linearComplexity(String block, int M) {
-        int L = 0;
-        char[] blockElems = block.toCharArray();
-        if (blockElems[0] == '1') {
-            ++L;
+    public static double linearComplexity(String block) {
+        int[] seq = new int[block.length()];
+        char[] blockArray = block.toCharArray();
+        for (int i = 0; i < blockArray.length; ++i) {
+            seq[i] = Integer.parseInt(String.valueOf(blockArray[i]));
         }
-        for (int i = 1; i < blockElems.length; ++i) {
-            if (blockElems[i] == '1' && blockElems[i-1] == '0') {
-                ++L;
-            }
+        Berlekamp_Massey berlekamp_massey = new Berlekamp_Massey(seq);
+        while (berlekamp_massey.getN() < seq.length) {
+            berlekamp_massey.iteration();
         }
-        return L;
+        berlekamp_massey.correctL();
+        berlekamp_massey.print();
+//        for (int i = 0; i < berlekamp_massey.getC().length; i++) {
+//            System.out.println("index: " + i + " elem: " + berlekamp_massey.getC()[i]);
+//        }
+//        System.out.println("L: " + berlekamp_massey.getL());
+        return berlekamp_massey.getL();
+//        int L = 0;
+//        char[] blockElems = block.toCharArray();
+//        if (blockElems[0] == '1') {
+//            ++L;
+//        }
+//        for (int i = 1; i < blockElems.length; ++i) {
+//            if (blockElems[i] == '1' && blockElems[i-1] == '0') {
+//                ++L;
+//            }
+//        }
+//        return L;
     }
 }
