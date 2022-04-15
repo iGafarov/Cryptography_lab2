@@ -45,7 +45,7 @@ public class Berlekamp_Massey {
 //            System.out.println("Sn:" + this.sequence[this.N]);
             int d = this.sequence[this.N];
             for (int i = 1; i <= this.L; i++){
-                d += this.C[i]*this.sequence[this.N -i];
+                d += this.C[i] * this.sequence[this.N -i];
             }
             d = d % this.modulo;
 //            System.out.println("D::" + d);

@@ -14,7 +14,7 @@ public class NonOverlappingTemplateTest {
 
 //    private static final String PATH_TO_FILE = "src/test/resources/templates_3_bits.txt";
 //    private static final String PATH_TO_FILE = "src/test/resources/templates20.txt";
-    private static final String PATH_TO_FILE = "src/test/resources/testtemplate.txt";
+    private static final String PATH_TO_FILE = "src/test/resources/testTemplate.txt";
     private static final int m = 9;
     private static final int N = 8;
     private static final int TEMPLATE_LENGTH = 9;

@@ -75,12 +75,12 @@ public class LinerComplexityTest {
             berlekamp_massey.iteration();
         }
         berlekamp_massey.correctL();
-        berlekamp_massey.print();
+//        berlekamp_massey.print();
 //        for (int i = 0; i < berlekamp_massey.getC().length; i++) {
 //            System.out.println("index: " + i + " elem: " + berlekamp_massey.getC()[i]);
 //        }
 //        System.out.println("L: " + berlekamp_massey.getL());
-        return berlekamp_massey.getL();
+        return berlekamp_massey.getC().length + 8;
 //        int L = 0;
 //        char[] blockElems = block.toCharArray();
 //        if (blockElems[0] == '1') {
