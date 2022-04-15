@@ -41,7 +41,7 @@ public class LinerComplexityTest {
             for (int i = 0; i < 7; i++) {
                 chi += Math.pow(vValues[i] - N * PI_VALUES[i], 2.0) / (N * PI_VALUES[i]);
             }
-            pValue = Gamma.incompleteGamma(K / 2, chi / 2.0);
+            pValue = Gamma.incompleteGammaComplement(K / 2, chi / 2.0);
             print(chi, pValue, vValues);
         }
     }
